@@ -1,2 +1,2 @@
 # pushnotif-reminder
-Push-notification using FCM and Cron for scheduler
+Push-notification using Golang, FCM, and Cron for scheduler
