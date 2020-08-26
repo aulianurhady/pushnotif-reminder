@@ -6,6 +6,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"time"
+
+	"github.com/robfig/cron"
 )
 
 type Request struct {
@@ -33,6 +36,16 @@ type PayloadResult struct {
 }
 
 func main() {
+	c := cron.New()
+	c.AddFunc("7 9 * * *", func() {
+		sendPushNotif()
+	})
+	log.Println("Cron is starting...")
+	c.Start()
+	time.Sleep(2 * time.Minute)
+}
+
+func sendPushNotif() {
 	reqStruct := &Request{
 		Notification: PayloadFCM{
 			Title: "Reminder Meeting",
